@@ -12,25 +12,25 @@ const Favourites = () => {
     <ListGroup>
       {fav.map((azienda, i) => {
         return (
-          <div key={i}>
-            <div className="d-flex justify-content-between my-2 mx-5">
-              <Link to={`/${azienda}`}>
-                <ListGroup.Item className="border-0">{azienda}</ListGroup.Item>
-              </Link>
-              <Button
-                type="button"
-                className="bg-transparent border-danger"
-                onClick={() => {
-                  dispatch({
-                    type: "REMOVE_FROM_FAVOURITES",
-                    payload: azienda,
-                  });
-                }}
-              >
-                🗑️
-              </Button>
-            </div>
-            <hr />
+          <div
+            key={i}
+            className="d-flex justify-content-between my-2 mx-5 border border-black p-1"
+          >
+            <Link to={`/${azienda}`}>
+              <ListGroup.Item className="border-0">{azienda}</ListGroup.Item>
+            </Link>
+            <Button
+              type="button"
+              className="bg-transparent border-danger"
+              onClick={() => {
+                dispatch({
+                  type: "REMOVE_FROM_FAVOURITES",
+                  payload: azienda,
+                });
+              }}
+            >
+              🗑️
+            </Button>
           </div>
         );
       })}

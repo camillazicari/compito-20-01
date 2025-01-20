@@ -40,7 +40,7 @@ const MainSearch = () => {
         >
           <h1 className="display-1">Remote Jobs Search</h1>
           <Link to={"/favourites"} className="btn btn-sm border-info text-info">
-            to Favourites
+            Favourites
           </Link>
         </Col>
         <Col xs={10} className="mx-auto">
