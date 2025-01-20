@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Job = ({ data }) => {
   const dispatch = useDispatch();
 
   const [isClicked, setIsClicked] = useState(false);
+  const location = useLocation();
 
   const changeStar = () => {
     if (isClicked) {
@@ -17,11 +18,18 @@ const Job = ({ data }) => {
   };
 
   const btnFavourite = () => {
-    dispatch({
-      type: "ADD_TO_FAVOURITES",
-      payload: data.company_name,
-    });
-    setIsClicked(true);
+    if (!isClicked) {
+      dispatch({
+        type: "ADD_TO_FAVOURITES",
+        payload: data.company_name,
+      });
+    } else {
+      dispatch({
+        type: "REMOVE_FROM_FAVOURITES",
+        payload: data.company_name,
+      });
+    }
+    setIsClicked(!isClicked);
   };
 
   return (
@@ -30,16 +38,20 @@ const Job = ({ data }) => {
       style={{ border: "1px solid #00000033", borderRadius: 4 }}
     >
       <Col xs={3}>
-        <Button
-          type="button"
-          className="bg-transparent border-0 text-black fs-4"
-          id="star"
-          onClick={() => {
-            btnFavourite();
-          }}
-        >
-          {changeStar()}
-        </Button>
+        {location.pathname === "/" ? (
+          <Button
+            type="button"
+            className="bg-transparent border-0 text-black fs-4"
+            id="star"
+            onClick={() => {
+              btnFavourite();
+            }}
+          >
+            {changeStar()}
+          </Button>
+        ) : (
+          <></>
+        )}
         <Link to={`/${data.company_name}`}>{data.company_name}</Link>
       </Col>
       <Col xs={9}>

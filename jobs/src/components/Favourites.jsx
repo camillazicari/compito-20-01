@@ -1,16 +1,20 @@
 import { ListGroup } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Favourites = () => {
   const fav = useSelector((state) => {
     return state.liked.content;
   });
-  console.log(fav);
 
   return (
     <ListGroup>
       {fav.map((azienda, i) => {
-        return <ListGroup.Item key={i}>{azienda}</ListGroup.Item>;
+        return (
+          <Link key={i} to={`/${azienda}`}>
+            <ListGroup.Item>{azienda}</ListGroup.Item>
+          </Link>
+        );
       })}
     </ListGroup>
   );
